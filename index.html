@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול חובות</title>
+   
+
+   <link rel="stylesheet" href="style.css">
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="gapi.load('client:auth2', initClient)">
+</script>
+</head>
+<body>
+    <h1>אפליקציית ניהול חובות</h1>
+
+    <div class="main-menu">
+        <button id="showAddData">הזנת נתונים</button>
+        <button id="showUpdateData">עדכון נתונים קיימים</button>
+        <button id="showLoadData">טעינת הנתונים הקיימים</button>
+    </div>
+
+    <div id="addDataSection" class="app-section">
+        <h2>הזנת חוב חדש</h2>
+        <form id="newDebtForm">
+            <label for="debtorName">שם החייב/לווה:</label>
+            <input type="text" id="debtorName" required>
+
+            <label for="debtAmount">סכום החוב:</label>
+            <input type="number" id="debtAmount" required>
+
+            <label for="debtDate">תאריך ההלוואה:</label>
+            <input type="date" id="debtDate" required>
+
+            <label for="debtDescription">תיאור החוב:</label>
+            <input type="text" id="debtDescription">
+
+            <label for="kupa">קופה:</label>
+            <select id="kupa">
+                <option value="">בחר קופה</option>
+            </select>
+
+            <button type="submit">הוסף חוב</button>
+        </form>
+        <div id="debtList">
+            <h3>רשימת חובות</h3>
+            <table id="debtsTable">
+                <thead>
+                    <tr>
+                        <th>שם</th>
+                        <th>סכום</th>
+                        <th>תאריך</th>
+                        <th>תיאור</th>
+                        <th>קופה</th>
+                        <th>סטטוס</th>
+                    </tr>
+                </thead>
+                <tbody id="debtsTableBody">
+                </tbody>
+            </table>
+        </div>
+        <button id="saveDataBtn">שמור נתונים</button>
+    </div>
+
+    <div id="updateDataSection" class="app-section">
+        <h2>עדכון נתונים קיימים</h2>
+        <p>בחלק זה תוכל לעדכן חובות קיימים (עדיין לא מיושם).</p>
+    </div>
+
+   <div id="loadDataSection" class="app-section">
+    <h2>טעינת הנתונים הקיימים</h2>
+    <div id="loadData">
+        <input type="file" id="loadDataInput" accept=".json" style="display: none;">
+        <button id="loadDataBtn" style="display: none;">טען נתונים מקובץ</button>
+        <br><br>
+        <button id="authorize_button">התחבר ל-Google Sheets</button>
+        <button id="signout_button" style="display: none;">התנתק</button>
+    </div>
+</div>
+
+    <div id="kupaManagementSection" class="app-section">
+        <h2>ניהול קופות</h2>
+        <div id="addKupa">
+            <label for="newKupaName">שם קופה חדשה:</label>
+            <input type="text" id="newKupaName">
+            <button id="addKupaBtn">הוסף קופה</button>
+        </div>
+        <ul id="kupaList">
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
