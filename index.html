@@ -86,13 +86,12 @@
         <ul id="kupaList">
         </ul>
     </div>
-    <script async defer src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
-<script>
+    <script>
   function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
-  window.onload = loadGoogleApi;
+    gapi.load('client:auth2', initClient);
+  }
 </script>
+<script async defer src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
 <script src="script.js"></script>
 
 </body>
