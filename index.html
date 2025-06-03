@@ -128,7 +128,7 @@
 
     function addFundRow() {
       const row = document.createElement('tr');
-      row.innerHTML = 
+      row.innerHTML = `
         <td>
           <select name="funds[]">
             <option value="אבא">אבא</option>
@@ -137,7 +137,8 @@
             <option value="דבלה">דבלה</option>
           </select>
         </td>
-        <td><input type="number" name="fund_amounts[]" /></td>
+        
+        <td><input type="number" name="fund_amounts[]" /></td>`
       ;
       document.getElementById('fundsTable').querySelector('tbody').appendChild(row);
     }
