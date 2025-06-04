@@ -19,6 +19,8 @@ const saveDataBtn = document.getElementById('saveDataBtn');
 const loadDataInput = document.getElementById('loadDataInput');
 const loadDataBtn = document.getElementById('loadDataBtn');
 const submitDebtBtn = document.querySelector('#newDebtForm button[type="submit"]');
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTNrNlet_lZaamV7YoXXEv0DEEs7JhW19ocAfcE85C_V5QUBMhMD7he2vUGiNk6Luo9Q/exec';
+
 
 // Google API related constants
 const CLIENT_ID = '1081187113370-ij4og9pfv0u2a79m4egnabnd8ibs41ql.apps.googleusercontent.com'; // Replace with your actual Client ID
@@ -405,5 +407,21 @@ if (loadDataBtn) {
     loadDataBtn.addEventListener('click', function() {
         console.log('Load Data button clicked');
         loadData();
+    });
+}
+function checkServerStatus() {
+  fetch(SCRIPT_URL) // שים כאן את הקישור המלא שלך
+    .then(response => {
+      if (!response.ok) throw new Error("HTTP error " + response.status);
+      return response.text(); // אם אתה מחזיר JSON, השתמש במקום זאת: return response.json();
+    })
+    .then(data => {
+      console.log("השרת מחזיר:", data);
+      // כאן אפשר לעדכן את הדף או להציג הודעה למשתמש
+      document.getElementById("status").textContent = "השרת מחובר ✔";
+    })
+    .catch(error => {
+      console.error("שגיאה בתקשורת עם השרת:", error);
+      document.getElementById("status").textContent = "בעיה בחיבור לשרת ✖";
     });
 }

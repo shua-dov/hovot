@@ -172,7 +172,7 @@
       const data = new FormData(e.target);
 
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyTNrNlet_lZaamV7YoXXEv0DEEs7JhW19ocAfcE85C_V5QUBMhMD7he2vUGiNk6Luo9Q/exec', {
+        const response = await fetch('SCRIPT_URL', {
           method: 'POST',
           body: data,
         });
