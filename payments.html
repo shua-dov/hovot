@@ -2,16 +2,38 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <title>פרעונות לפי טווח</title>
+  <title>פרעונות</title>
 </head>
 <body>
-  <h1>פרעונות לפי טווח תאריכים</h1>
-  <form id="range-form">
-    <label>מתאריך: <input type="date" name="from_date" required></label><br>
-    <label>עד תאריך: <input type="date" name="to_date" required></label><br>
-    <button type="submit">הצג</button>
-  </form>
-  <div id="results"></div>
-  <script src="payments.js"></script>
+  <h1>רשימת פרעונות</h1>
+  <table border="1" id="payments-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>תשלום</th>
+        <th>תאריך</th>
+        <th>סכום</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=get_payments")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#payments-table tbody");
+        data.forEach(row => {
+          const tr = document.createElement("tr");
+          row.forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => console.error("שגיאה בטעינת פרעונות:", err));
+  </script>
 </body>
 </html>

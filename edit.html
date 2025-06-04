@@ -2,22 +2,46 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <title>עדכון חוב קיים</title>
+  <title>עדכון חובות</title>
 </head>
 <body>
-  <h1>עדכון חוב קיים</h1>
-  <form id="edit-form">
-    <label for="loan_id">מזהה חוב:</label>
-    <input type="text" id="loan_id" name="loan_id" required><br>
+  <h1>רשימת חובות קיימים</h1>
+  <table border="1" id="loans-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>חייב</th>
+        <th>מלווה</th>
+        <th>סכום</th>
+        <th>תאריך לקיחה</th>
+        <th>סוג פרעון</th>
+        <th>מספר תשלומים</th>
+        <th>סכום חודשי</th>
+        <th>תאריך פרעון</th>
+        <th>קופות</th>
+        <th>הערות</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <label for="amount">סכום חדש:</label>
-    <input type="number" id="amount" name="amount"><br>
-
-    <label for="notes">הערות:</label>
-    <input type="text" id="notes" name="notes"><br>
-
-    <button type="submit">עדכן</button>
-  </form>
-  <script src="edit.js"></script>
+  <script>
+    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=get_loans")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#loans-table tbody");
+        data.forEach(row => {
+          const tr = document.createElement("tr");
+          row.forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => console.error("שגיאה בטעינת החובות:", err));
+  </script>
 </body>
 </html>
+
